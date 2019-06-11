@@ -59,7 +59,12 @@ public class KeyboardVisibilityPlugin implements StreamHandler, Application.Acti
 
     @Override
     public void onActivityStarted(Activity activity) {
-        try {
+       
+    }
+
+    @Override
+    public void onActivityResumed(Activity activity) {
+	try {
             mainView = ((ViewGroup)activity.findViewById(android.R.id.content)).getChildAt(0);
             mainView.getViewTreeObserver().addOnGlobalLayoutListener(this);
         }
@@ -69,16 +74,13 @@ public class KeyboardVisibilityPlugin implements StreamHandler, Application.Acti
     }
 
     @Override
-    public void onActivityResumed(Activity activity) {
-    }
-
-    @Override
     public void onActivityPaused(Activity activity) {
+	unregisterListener();
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-        unregisterListener();
+
     }
 
     @Override
@@ -87,8 +89,7 @@ public class KeyboardVisibilityPlugin implements StreamHandler, Application.Acti
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-
-        unregisterListener();
+	    
     }
 
     private void unregisterListener() {
